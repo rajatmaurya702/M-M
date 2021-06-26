@@ -4,6 +4,10 @@ const express = require("express")
 const app = express()
 const DBconnect = require("./DBconnect");
 const User = require("./userModel");
+const token_route = require("./routes/token_route")
+const setting_route = require("./routes/setting_route")
+const populate_mm = require("./routes/populate_m&m")
+const bodyParser = require("body-parser")
 
 const { auth } = require('express-openid-connect');
 
@@ -19,11 +23,22 @@ const config = {
 // auth router attaches /login, /logout, and /callback routes to the baseURL
 app.use(auth(config));
 
+app.use(express.json());
+
+app.use(bodyParser.urlencoded({
+    extended: false
+}))
+
 //template engine
 app.set("view engine", "ejs")
 
 //connect db
 DBconnect()
+
+//routes
+app.use("/token", token_route);
+app.use("/setting", setting_route);
+app.use("/populate", populate_mm);
 
 
 
@@ -31,7 +46,6 @@ DBconnect()
 app.get('/', (req, res, next) => {
     console.log("user", req.oidc.user);
     if (req.oidc.isAuthenticated()) {
-        let name = req.oidc.user.name;
         const email = req.oidc.user.email;
 
         User.findOne({ email: email }, (err, doc) => {
@@ -41,17 +55,20 @@ app.get('/', (req, res, next) => {
             }
 
             if (doc) {
-                return res.render("home", { user: { name:doc.name, email: doc.email} });
+                return res.render("home", { user:doc});
             }
             else {
-                name = ""
-                const user = new User({ name, email });
+                 doc.firstname= firstname;
+                 doc.lastname = lastname;
+                 doc.email = email;
+                 doc.role = "mentee"
+                const user = new User(doc);
                 user.save((err) => {
                     if (err) {
                         return next(new Error("User.save db error"));
                     }
                     else {
-                        return res.render("home", { user: { name, email } });
+                        return res.render("home", { user: doc });
                     }
                 })
             }
