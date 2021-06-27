@@ -58,10 +58,17 @@ app.get('/', (req, res, next) => {
                 return res.render("home", { user:doc});
             }
             else {
-                 doc.firstname= "";
-                 doc.lastname = "";
-                 doc.email = email;
-                 doc.role = "mentee"
+                 doc = {
+                    firstname = "",
+                    lastname = "",
+                    email = email,
+                    role = "mentee"
+                 }
+                //  doc.firstname= "";
+                //  doc.lastname = "";
+                
+                //  doc.email = email;
+                //  doc.role = "mentee"
                 const user = new User(doc);
                 user.save((err) => {
                     if (err) {
