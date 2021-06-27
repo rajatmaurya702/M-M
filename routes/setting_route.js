@@ -14,8 +14,10 @@ router.post("/", (req, res)=>{
         const firstname= req.body.firstname
         const lastname = req.body.lastname
         const role = req.body.role
+        const tags = req.body.tags
+        
 
-        console.log("data from client", firstname, lastname, role);
+        console.log("data from client, tags", firstname, lastname, role, tags);
 
         User.findOne({email:email}, (err, doc)=>{
             if(err){
@@ -27,6 +29,7 @@ router.post("/", (req, res)=>{
                 doc.firstname = firstname
                 doc.lastname = lastname
                 doc.role = role
+                doc.tags = tags
                 doc.save((err)=>{
                     if(err){
                         console.error("setting_router error: save doc");

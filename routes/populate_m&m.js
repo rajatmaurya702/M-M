@@ -15,6 +15,22 @@ router.post("/", (req, res)=>{
         }
         
         if(docs){
+            let current_user_tags = req.body.tags.split(" ")
+            docs = docs.filter((doc)=>{
+                if(!doc.tags) return false;
+                let other_user_tags = doc.tags.split(" ")
+                if(other_user_tags.length === 0) return false;
+                for(let i = 0; i< current_user_tags.length; i++){
+                    for(let j = 0; j< other_user_tags.length; j++){
+                        if(current_user_tags[i] === other_user_tags[j]){
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            })
+
+
             res.send(JSON.stringify({status:"success", data: docs}));
         }
         else{

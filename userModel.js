@@ -34,7 +34,8 @@ const User = new mongoose.Schema({
             type:String,
             max:1000
         }
-    }
+    },
+    tags:String
 },
 {timestamps:true}
 )

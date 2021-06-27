@@ -252,7 +252,7 @@
           <div class="col-sm-10">
             <div class="form-check">
               <input class="form-check-input" type="radio" name="role" id="gridRadios1" value="mentee"
-                <%=user.role=="mentee" || !user.role?"checked" : "" %> >
+                <%=user.role=="mentee" || !user.role ?"checked" : "" %> >
               <label class="form-check-label" for="gridRadios1">
                 Mentee
               </label>
@@ -266,6 +266,14 @@
             </div>
           </div>
         </fieldset>
+
+        <div class="col-md-6">
+          <label for="inputEmail7" class="form-label">Interested Topic</label>
+          <input type="text" class="form-control" name="tags" id="inputEmail7"
+            value="<%= user.tags ? user.tags : ""%>">
+        </div>
+
+        <!-- <input type="text" value="<%= user.tags%>" name="tags"> -->
         <div class="col-12">
           <button type="button" class="btn btn-primary" name="submitButton">Save</button>
         </div>
@@ -343,7 +351,7 @@
     let role = '<%-user.role%>';
     let firstname = '<%- user.firstname%>'
     let lastname = '<%- user.lastname%>'
-
+    let tags = '<%-user.tags%>'
 
 
     //calling buttons
@@ -395,7 +403,8 @@
         body: JSON.stringify({
           firstname: settingFormElements["firstname"].value,
           lastname: settingFormElements["lastname"].value,
-          role: settingFormElements["role"].value
+          role: settingFormElements["role"].value,
+          tags:settingFormElements['tags'].value
         }),
 
         // Adding headers to the request
@@ -454,7 +463,8 @@
         body: JSON.stringify({
           firstname: settingFormElements["firstname"].value,
           lastname: settingFormElements["lastname"].value,
-          role: settingFormElements["role"].value === 'mentee' ? 'mentor' : 'mentee'
+          role: settingFormElements["role"].value === 'mentee' ? 'mentor' : 'mentee',
+          tags:settingFormElements["tags"].value
         }),
 
         // Adding headers to the request
@@ -471,7 +481,11 @@
           console.log(json)
           if (json.status === "success") {
 
-            populateAreaDiv.innerHTML = ""
+            if((settingFormElements["role"].value === 'mentee' ? 'mentor' : 'mentee') === 'mentee')
+              populateAreaDiv.innerHTML = "<h2>Mentees with same interest </h2>"
+            else
+              populateAreaDiv.innerHTML = "<h2>Mentors with matching interest</h2>"
+            
             success_mesage("Saved!", settingForm);
             json.data.forEach((data) => {
               createCard(data);
@@ -495,7 +509,7 @@
         <div class="card-body">
           <h5 class="card-title">${data.firstname ? data.firstname : ""}</h5>
           <h6 class="card-subtitle mb-2 text-muted">${data.email}</h6>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <p class="card-text">${data.tags}</p>
           <a class="card-link">Join</a>
         </div>
         `
