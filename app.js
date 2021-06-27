@@ -59,10 +59,10 @@ app.get('/', (req, res, next) => {
             }
             else {
                  doc = {
-                    firstname = "",
-                    lastname = "",
-                    email = email,
-                    role = "mentee"
+                    firstname : "",
+                    lastname : "",
+                    email : email,
+                    role : "mentee"
                  }
                 //  doc.firstname= "";
                 //  doc.lastname = "";
