@@ -170,12 +170,7 @@
       }
     }
 
-    /* video {
-      color: white;
-      border-radius: 1rem;
-       background-color: rgba(248, 248, 248, 1); 
-    } 
-    */
+
 
   </style>
 </head>
@@ -195,9 +190,7 @@
           <li><a href="#" class="nav-link px-2 text-white">Home</a></li>
         </ul>
 
-        <!-- <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-          <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
-        </form> -->
+    
 
         <div class="text-end">
           <span>
@@ -286,48 +279,9 @@
   <div class="video-calling-main-outer-div display-none">
     <div class="video-calling-inner-div">
       <span class="cancel-button-call">+</span>
-      <!-- <div id="success-alert" class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Congratulations!</strong><span> You can invite others join this channel by click </span><a href=""
-          target="_blank">here</a>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div id="success-alert-with-token" class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Congratulations!</strong><span> Joined room successfully. </span>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div id="success-alert-with-token" class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Congratulations!</strong><span> Joined room successfully. </span>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div> -->
+
 
       <div class="container">
-        <!-- <form id="join-form">
-           <div class="row join-info-group">
-            <div class="col-sm">
-              <p class="join-info-text">AppID</p>
-              <input id="appid" type="text" placeholder="enter appid" required>
-            </div>
-            <div class="col-sm">
-              <p class="join-info-text">Token(optional)</p>
-              <input id="token" type="text" placeholder="enter token">
-            </div>
-            <div class="col-sm">
-              <p class="join-info-text">Channel</p>
-              <input id="channel" type="text" placeholder="enter channel name" required>
-            </div>
-          </div> 
-
-          <div class="button-group">
-            <button id="join" type="submit" class="btn btn-primary btn-sm">Join</button>
-            <button id="leave" type="button" class="btn btn-primary btn-sm" disabled>Leave</button>
-          </div>
-        </form> -->
 
         <div class="row video-group">
           <div class="col">
@@ -381,9 +335,7 @@
         settingFormDiv.classList.remove("display-none")
       }
 
-      // if(!settingFormDiv.classList.contains("display-block")){
-      //   settingFormDiv.classList.add("display-block");
-      // }
+     
     })
 
 
@@ -571,30 +523,6 @@
     };
     let talking_with_user = null;
 
-    // $("#join-form").submit(async function (e) {
-    //   e.preventDefault();
-    //   $("#join").attr("disabled", true);
-    //   try {
-    //     options.appid = $("#appid").val();
-    //     options.token = $("#token").val();
-    //     options.channel = $("#channel").val();
-    //     await join();
-    //     if (options.token) {
-    //       $("#success-alert-with-token").css("display", "block");
-    //     } else {
-    //       $("#success-alert a").attr("href", `index.html?appid=${options.appid}&channel=${options.channel}&token=${options.token}`);
-    //       $("#success-alert").css("display", "block");
-    //     }
-    //   } catch (error) {
-    //     console.error(error);
-    //   } finally {
-    //     $("#leave").attr("disabled", false);
-    //   }
-    // })
-
-    // $("#leave").click(function (e) {
-    //   leave();
-    // })
 
     async function join() {
 
